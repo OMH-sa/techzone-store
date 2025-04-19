@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سلة المشتريات - تيك زون</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    header, footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #495057;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background-color: #212529;
+    }
+    .content {
+      padding: 20px;
+    }
+    .cart-page {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .cart-item {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .cart-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .cart-item button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .cart-item button:hover {
+      background-color: #c82333;
+    }
+    .checkout {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .checkout button {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .checkout button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>سلة المشتريات - TechZone</h1>
+  </header>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">المنتجات</a>
+    <a href="cart.html">السلة</a>
+    <a href="contact.html">تواصل معنا</a>
+  </nav>
+  <div class="content">
+    <h2>🛒 المنتجات التي قمت بإضافتها:</h2>
+    <div id="cart-items" class="cart-page"></div>
+    <div class="checkout">
+      <button onclick="checkout()">متابعة للدفع</button>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2025 متجر تيك زون. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script>
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("cart-items");
+
+    if (cartItems.length === 0) {
+      container.innerHTML = '<p>لم تقم بإضافة أي منتج بعد.</p>';
+    } else {
+      cartItems.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <h3>${item.name}</h3>
+          <p>السعر: ${item.price} ريال</p>
+          <button onclick="removeItem(${index})">🗑️ حذف</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function removeItem(index) {
+      cartItems.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      location.reload();
+    }
+
+    function checkout() {
+      if (cartItems.length === 0) {
+        alert("السلة فارغة!");
+      } else {
+        alert("✅ تم تأكيد الطلب! شكراً لتسوقك من تيك زون.");
+        localStorage.removeItem("cart");
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>

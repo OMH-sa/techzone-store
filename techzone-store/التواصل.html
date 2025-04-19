@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تواصل معنا - تيك زون</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    header, footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #495057;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background-color: #212529;
+    }
+    .content {
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: 'Tahoma';
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>تواصل معنا - TechZone</h1>
+  </header>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">المنتجات</a>
+    <a href="cart.html">السلة</a>
+    <a href="contact.html">تواصل معنا</a>
+  </nav>
+  <div class="content">
+    <h2>📩 راسلنا الآن</h2>
+    <form onsubmit="submitForm(event)">
+      <input type="text" placeholder="الاسم الكامل" required />
+      <input type="email" placeholder="البريد الإلكتروني" required />
+      <textarea rows="5" placeholder="رسالتك..." required></textarea>
+      <button type="submit">إرسال</button>
+    </form>
+    <p id="response" style="color: green; margin-top: 10px;"></p>
+  </div>
+  <footer>
+    <p>&copy; 2025 متجر تيك زون. جميع الحقوق محفوظة.</p>
+  </footer>
+  <script>
+    function submitForm(e) {
+      e.preventDefault();
+      document.getElementById("response").innerText = "✅ تم إرسال الرسالة بنجاح. شكرًا لتواصلك معنا!";
+    }
+  </script>
+</body>
+</html>

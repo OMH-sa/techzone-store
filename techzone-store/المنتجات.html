@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المنتجات - تيك زون</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    header, footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #495057;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background-color: #212529;
+    }
+    .content {
+      padding: 20px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .product button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .product button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>منتجاتنا - TechZone</h1>
+  </header>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">المنتجات</a>
+    <a href="cart.html">السلة</a>
+    <a href="contact.html">تواصل معنا</a>
+  </nav>
+  <div class="content">
+    <div class="products" id="product-list"></div>
+  </div>
+  <footer>
+    <p>&copy; 2025 متجر تيك زون. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script>
+    const products = [
+      {
+        name: "هاتف ذكي - سامسونج",
+        price: 1200,
+        image: "https://via.placeholder.com/300x180?text=هاتف+سامسونج"
+      },
+      {
+        name: "لاب توب HP",
+        price: 2800,
+        image: "https://via.placeholder.com/300x180?text=لاب+توب+HP"
+      },
+      {
+        name: "سماعة بلوتوث",
+        price: 250,
+        image: "https://via.placeholder.com/300x180?text=سماعة+بلوتوث"
+      }
+    ];
+
+    const productList = document.getElementById("product-list");
+
+    products.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h3>${product.name}</h3>
+        <p>السعر: ${product.price} ريال</p>
+        <button onclick='addToCart(${JSON.stringify(product)})'>أضف إلى السلة</button>
+      `;
+      productList.appendChild(div);
+    });
+
+    function addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("✅ تم إضافة المنتج إلى السلة!");
+    }
+  </script>
+</body>
+</html>
